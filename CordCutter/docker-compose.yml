@@ -4,7 +4,8 @@ services:
     container_name: nzbget
     image: linuxserver/nzbget:latest
     restart: unless-stopped
-    network_mode: host
+    networks:
+        - plex
     environment:
       - PUID=${PUID} # default user id, defined in .env
       - PGID=${PGID} # default group id, defined in .env
@@ -17,7 +18,8 @@ services:
     container_name: sonarr
     image: linuxserver/sonarr:latest
     restart: unless-stopped
-    network_mode: host
+    networks:
+        - plex
     environment:
       - PUID=${PUID} # default user id, defined in .env
       - PGID=${PGID} # default group id, defined in .env
@@ -32,7 +34,8 @@ services:
     container_name: radarr
     image: linuxserver/radarr:latest
     restart: unless-stopped
-    network_mode: host
+    networks:
+        - plex
     environment:
       - PUID=${PUID} # default user id, defined in .env
       - PGID=${PGID} # default group id, defined in .env
@@ -49,7 +52,8 @@ services:
     restart: unless-stopped
     environment:
       - TZ=${TZ} # timezone, defined in .env
-    network_mode: host
+    networks:
+        - plex
     volumes:
       - ${ROOT}/config/plex/db:/config # plex database
       - ${ROOT}/config/plex/transcode:/transcode # temp transcoded files
@@ -59,7 +63,8 @@ services:
     container_name: bazarr
     image: linuxserver/bazarr
     restart: unless-stopped
-    network_mode: host
+    networks:
+        - plex
     environment:
       - PUID=${PUID} # default user id, defined in .env
       - PGID=${PGID} # default group id, defined in .env
@@ -72,22 +77,22 @@ services:
     ports:
       - 6767:6767
   muximux:
-        image: linuxserver/muximux
-        container_name: muximux
-        restart: unless-stopped
-        logging:
-            driver: 'json-file'
-            options:
-                max-file: '5'
-                max-size: '10m'
-        networks:
-            - web
-        expose:
-            - 80
-        environment:
-            - TZ=${TZ}
-            - PUID=${PUID}
-            - PGID=${PGID}
-        volumes:
-            - './muximux:/config'
-            - '/etc/localtime:/etc/localtime:ro'
+    image: linuxserver/muximux
+    container_name: muximux
+    restart: unless-stopped
+    logging:
+        driver: 'json-file'
+        options:
+            max-file: '5'
+            max-size: '10m'
+    networks:
+        - plex
+    expose:
+        - 80
+    environment:
+        - TZ=${TZ}
+        - PUID=${PUID}
+        - PGID=${PGID}
+    volumes:
+        - './muximux:/config'
+        - '/etc/localtime:/etc/localtime:ro'
