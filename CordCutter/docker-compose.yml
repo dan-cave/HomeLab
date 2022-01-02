@@ -1,6 +1,6 @@
 version: "3.4"
 networks:
-  - bustardnest
+  bustardnest:
 services:
   nzbget:
     container_name: nzbget
