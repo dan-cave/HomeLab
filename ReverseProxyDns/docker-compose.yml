@@ -15,7 +15,7 @@ services:
             - SUBDOMAINS=wildcard
             - VALIDATION=dns
             - CERTPROVIDER=zerossl
-            - DNSPLUGIN= route53
+            - DNSPLUGIN=route53
             - EMAIL=${EMAIL}
         volumes:
             - ./swag:/config
