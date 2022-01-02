@@ -73,22 +73,4 @@ services:
       - ${ROOT}/complete/tv:/tv # tv shows folder
     ports:
       - 6767:6767
-  muximux:
-    image: linuxserver/muximux
-    container_name: muximux
-    restart: unless-stopped
-    logging:
-        driver: 'json-file'
-        options:
-            max-file: '5'
-            max-size: '10m'
-    network_mode: host
-    ports:
-      - "6918:80"
-    environment:
-        - TZ=${TZ}
-        - PUID=${PUID}
-        - PGID=${PGID}
-    volumes:
-        - './muximux:/config'
-        - '/etc/localtime:/etc/localtime:ro'
+
