@@ -1,6 +1,6 @@
 version: "3.5"
 networks:
-    - bustardnest
+    bustardnest:
 services:
     swag:
         image: ghcr.io/linuxserver/swag
