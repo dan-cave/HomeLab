@@ -1,4 +1,6 @@
 version: "3.4"
+networks:
+  - bustardnest
 services:
   nzbget:
     container_name: nzbget
@@ -82,7 +84,7 @@ services:
             max-size: '10m'
     network_mode: host
     ports:
-      -80:6963
+      - "6918:80"
     environment:
         - TZ=${TZ}
         - PUID=${PUID}

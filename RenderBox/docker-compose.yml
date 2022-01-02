@@ -1,0 +1,7 @@
+version: "3.5"
+networks:
+  - bustardnest
+services:
+  blender:
+    image: nytimes/blender:latest
+    container_name: blender

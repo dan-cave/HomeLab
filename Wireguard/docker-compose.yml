@@ -1,0 +1,20 @@
+version: "3.5"
+services:
+  wireguard:
+    image: linuxserver/wireguard:latest
+    restart: unless-stopped
+    container_name: wireguard
+    environment:
+      - UUID=${UUId}
+      - PGID=${PGID}
+      - TZ=${TZ}
+      - SERVERURL=wireguard.bn.dansadeveloper.com
+    ports:
+      - "51820:51820/udp"
+    volumes:
+      - "./config:/config"
+      - "./modules:/modules"
+    sysctls:
+      net.ipv4.conf.all.src_valid_mark: "1"
+    networks:
+      - bustardnest
