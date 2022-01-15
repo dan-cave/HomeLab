@@ -1,0 +1,24 @@
+version: "3.9"
+services:
+    swag:
+        image: ghcr.io/linuxserver/swag
+        container_name: swag
+        cap_add:
+            - NET_ADMIN
+        environment:
+            - PUID=${PUID}
+            - PGID=${PGID}
+            - TZ=${TZ} 
+            - URL=bn.dansadeveloper.com
+            - SUBDOMAINS=wildcard
+            - VALIDATION=dns
+            - CERTPROVIDER=letsencrypt
+            - DNSPLUGIN=route53
+            - PROPAGATION=600
+        volumes:
+            - ./swag:/config
+        ports:
+            - 443:443
+            - 80:80
+        restart: unless-stopped
+
